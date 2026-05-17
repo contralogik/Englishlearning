@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>English Review Cards</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">IELTS English Review</p>
+        <h1>英文词组与好句复习卡片</h1>
+      </div>
+      <div class="stats" aria-label="复习统计">
+        <span><strong id="total-count">0</strong> 条内容</span>
+        <span><strong id="mastered-count">0</strong> 已掌握</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="controls" aria-label="筛选和搜索">
+        <label class="search-box">
+          <span>搜索</span>
+          <input id="search-input" type="search" placeholder="输入英文、中文解释或标签">
+        </label>
+
+        <div class="filter-group" aria-label="内容类型">
+          <button class="chip active" data-type="all" type="button">全部</button>
+          <button class="chip" data-type="phrase" type="button">词组</button>
+          <button class="chip" data-type="sentence" type="button">好句</button>
+        </div>
+
+        <div id="tag-filters" class="filter-group" aria-label="标签筛选"></div>
+      </section>
+
+      <section class="review-layout">
+        <div>
+          <div class="section-heading">
+            <h2>词组与搭配</h2>
+            <span id="phrase-count">0</span>
+          </div>
+          <div id="phrases" class="card-grid"></div>
+        </div>
+
+        <div>
+          <div class="section-heading">
+            <h2>精美语句</h2>
+            <span id="sentence-count">0</span>
+          </div>
+          <div id="sentences" class="card-grid"></div>
+        </div>
+      </section>
+
+      <p id="empty-state" class="empty-state" hidden>没有匹配的内容。换个关键词或标签试试。</p>
+    </main>
+
+    <template id="card-template">
+      <article class="review-card">
+        <div class="card-header">
+          <span class="card-type"></span>
+          <button class="mastery-button" type="button"></button>
+        </div>
+        <h3></h3>
+        <dl></dl>
+        <div class="tag-row"></div>
+      </article>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>
