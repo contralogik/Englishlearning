@@ -19,32 +19,24 @@
     </header>
 
     <main>
-      <section class="controls" aria-label="筛选和搜索">
-        <label class="search-box">
-          <span>搜索</span>
-          <input id="search-input" type="search" placeholder="输入英文、中文解释或标签">
-        </label>
-
-        <div class="filter-group" aria-label="内容类型">
-          <button class="chip active" data-type="all" type="button">全部</button>
-          <button class="chip" data-type="phrase" type="button">词组</button>
-          <button class="chip" data-type="sentence" type="button">好句</button>
-        </div>
-
-        <div id="tag-filters" class="filter-group" aria-label="标签筛选"></div>
-      </section>
-
       <section class="review-layout">
         <aside class="index-panel" aria-label="词条索引">
           <div class="section-heading">
-            <h2>词条索引</h2>
+            <h2>全部记录</h2>
             <span id="visible-count">0</span>
           </div>
           <div class="index-counts">
             <span>词组 <strong id="phrase-count">0</strong></span>
             <span>好句 <strong id="sentence-count">0</strong></span>
           </div>
-          <div id="entry-list" class="entry-list"></div>
+          <section class="entry-section">
+            <h3>词组</h3>
+            <div id="phrase-list" class="entry-list"></div>
+          </section>
+          <section class="entry-section">
+            <h3>语句</h3>
+            <div id="sentence-list" class="entry-list"></div>
+          </section>
         </aside>
 
         <section class="detail-panel" aria-label="词条详情">
@@ -67,7 +59,6 @@
         </div>
         <h3></h3>
         <dl></dl>
-        <div class="tag-row"></div>
       </article>
     </template>
 

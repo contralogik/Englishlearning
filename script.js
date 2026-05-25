@@ -15,16 +15,12 @@ const state = {
   items: [],
   visible: [],
   selectedId: "",
-  query: "",
-  type: "all",
-  tag: "all",
   mastered: new Set(JSON.parse(localStorage.getItem("english-review-mastered") || "[]")),
 };
 
 const elements = {
-  search: document.querySelector("#search-input"),
-  tags: document.querySelector("#tag-filters"),
-  entryList: document.querySelector("#entry-list"),
+  phraseList: document.querySelector("#phrase-list"),
+  sentenceList: document.querySelector("#sentence-list"),
   detailCard: document.querySelector("#detail-card"),
   phraseCount: document.querySelector("#phrase-count"),
   sentenceCount: document.querySelector("#sentence-count"),
@@ -39,26 +35,8 @@ const elements = {
 init();
 
 async function init() {
-  bindEvents();
   state.items = await loadEntries();
-  renderTagFilters();
   render();
-}
-
-function bindEvents() {
-  elements.search.addEventListener("input", (event) => {
-    state.query = event.target.value.trim().toLowerCase();
-    render();
-  });
-
-  document.querySelectorAll("[data-type]").forEach((button) => {
-    button.addEventListener("click", () => {
-      state.type = button.dataset.type;
-      document.querySelectorAll("[data-type]").forEach((item) => item.classList.remove("active"));
-      button.classList.add("active");
-      render();
-    });
-  });
 }
 
 async function loadEntries() {
@@ -144,27 +122,8 @@ function normalizeKey(rawKey) {
   return aliases[key] || "";
 }
 
-function renderTagFilters() {
-  const tags = ["all", ...new Set(state.items.flatMap((item) => item.tags))];
-  elements.tags.innerHTML = "";
-
-  tags.forEach((tag) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = `chip${tag === state.tag ? " active" : ""}`;
-    button.textContent = tag === "all" ? "全部标签" : tag;
-    button.addEventListener("click", () => {
-      state.tag = tag;
-      elements.tags.querySelectorAll(".chip").forEach((item) => item.classList.remove("active"));
-      button.classList.add("active");
-      render();
-    });
-    elements.tags.append(button);
-  });
-}
-
 function render() {
-  const visible = state.items.filter(matchesFilters);
+  const visible = state.items;
   state.visible = visible;
   const phrases = visible.filter((item) => item.type === "phrase");
   const sentences = visible.filter((item) => item.type === "sentence");
@@ -173,7 +132,8 @@ function render() {
     state.selectedId = visible[0]?.id || "";
   }
 
-  renderEntryList(visible);
+  renderEntryList(elements.phraseList, phrases);
+  renderEntryList(elements.sentenceList, sentences);
   renderDetail(visible.find((item) => item.id === state.selectedId));
 
   elements.phraseCount.textContent = phrases.length;
@@ -184,15 +144,8 @@ function render() {
   elements.empty.hidden = visible.length > 0;
 }
 
-function matchesFilters(item) {
-  const typeMatches = state.type === "all" || item.type === state.type;
-  const tagMatches = state.tag === "all" || item.tags.includes(state.tag);
-  const queryMatches = !state.query || item.searchText.includes(state.query);
-  return typeMatches && tagMatches && queryMatches;
-}
-
-function renderEntryList(items) {
-  elements.entryList.innerHTML = "";
+function renderEntryList(container, items) {
+  container.innerHTML = "";
 
   items.forEach((item) => {
     const button = document.createElement("button");
@@ -202,6 +155,7 @@ function renderEntryList(items) {
     button.addEventListener("click", () => {
       state.selectedId = item.id;
       render();
+      document.querySelector(".detail-panel").scrollIntoView({ behavior: "smooth", block: "start" });
     });
 
     const title = document.createElement("span");
@@ -210,10 +164,10 @@ function renderEntryList(items) {
 
     const meta = document.createElement("span");
     meta.className = "entry-meta";
-    meta.textContent = `${item.typeLabel} · ${item.tags.slice(0, 2).join(", ") || "untagged"}`;
+    meta.textContent = item.typeLabel;
 
     button.append(title, meta);
-    elements.entryList.append(button);
+    container.append(button);
   });
 }
 
@@ -242,14 +196,6 @@ function renderDetail(item) {
     dt.textContent = label;
     dd.textContent = value;
     details.append(dt, dd);
-  });
-
-  const tagRow = card.querySelector(".tag-row");
-  item.tags.forEach((tag) => {
-    const span = document.createElement("span");
-    span.className = "tag";
-    span.textContent = tag;
-    tagRow.append(span);
   });
 
   const selectedIndex = state.visible.findIndex((visibleItem) => visibleItem.id === item.id);

@@ -88,50 +88,7 @@ h1 {
 main {
   width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 28px 0 54px;
-}
-
-.controls {
-  display: grid;
-  grid-template-columns: minmax(240px, 1fr) auto;
-  gap: 14px;
-  align-items: end;
-  margin-bottom: 28px;
-}
-
-.search-box {
-  display: grid;
-  gap: 8px;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-.search-box input {
-  width: 100%;
-  min-height: 44px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 10px 12px;
-  background: var(--panel);
-  color: var(--ink);
-  outline: none;
-}
-
-.search-box input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(47, 111, 94, 0.16);
-}
-
-.filter-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: flex-end;
-}
-
-#tag-filters {
-  grid-column: 1 / -1;
-  justify-content: flex-start;
+  padding: 24px 0 54px;
 }
 
 .chip,
@@ -200,7 +157,7 @@ main {
 .index-counts {
   display: flex;
   gap: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 18px;
   color: var(--muted);
   font-size: 0.88rem;
 }
@@ -212,10 +169,20 @@ main {
   background: rgba(255, 255, 255, 0.7);
 }
 
+.entry-section + .entry-section {
+  margin-top: 22px;
+}
+
+.entry-section h3 {
+  margin-bottom: 10px;
+  color: var(--accent-strong);
+  font-size: 1rem;
+}
+
 .entry-list {
   display: grid;
   gap: 6px;
-  max-height: calc(100vh - 250px);
+  max-height: 36vh;
   overflow: auto;
   padding-right: 4px;
 }
@@ -245,8 +212,7 @@ main {
 }
 
 .entry-meta {
-  display: flex;
-  gap: 8px;
+  display: none;
   margin-top: 4px;
   color: var(--muted);
   font-size: 0.78rem;
@@ -304,21 +270,6 @@ main {
   overflow-wrap: anywhere;
 }
 
-.tag-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 16px;
-}
-
-.tag {
-  border-radius: 999px;
-  padding: 4px 8px;
-  background: #f1eee7;
-  color: var(--muted);
-  font-size: 0.8rem;
-}
-
 .empty-state {
   border: 1px dashed var(--line);
   border-radius: 8px;
@@ -338,7 +289,6 @@ main {
     justify-content: flex-start;
   }
 
-  .controls,
   .review-layout {
     grid-template-columns: 1fr;
   }
@@ -348,10 +298,7 @@ main {
   }
 
   .entry-list {
-    max-height: 42vh;
-  }
-
-  .filter-group {
-    justify-content: flex-start;
+    max-height: none;
+    overflow: visible;
   }
 }
