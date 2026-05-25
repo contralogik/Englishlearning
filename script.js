@@ -13,6 +13,8 @@ const FIELD_LABELS = {
 
 const state = {
   items: [],
+  visible: [],
+  selectedId: "",
   query: "",
   type: "all",
   tag: "all",
@@ -22,10 +24,12 @@ const state = {
 const elements = {
   search: document.querySelector("#search-input"),
   tags: document.querySelector("#tag-filters"),
-  phrases: document.querySelector("#phrases"),
-  sentences: document.querySelector("#sentences"),
+  entryList: document.querySelector("#entry-list"),
+  detailCard: document.querySelector("#detail-card"),
   phraseCount: document.querySelector("#phrase-count"),
   sentenceCount: document.querySelector("#sentence-count"),
+  visibleCount: document.querySelector("#visible-count"),
+  selectedPosition: document.querySelector("#selected-position"),
   totalCount: document.querySelector("#total-count"),
   masteredCount: document.querySelector("#mastered-count"),
   empty: document.querySelector("#empty-state"),
@@ -161,14 +165,20 @@ function renderTagFilters() {
 
 function render() {
   const visible = state.items.filter(matchesFilters);
+  state.visible = visible;
   const phrases = visible.filter((item) => item.type === "phrase");
   const sentences = visible.filter((item) => item.type === "sentence");
 
-  renderCards(elements.phrases, phrases);
-  renderCards(elements.sentences, sentences);
+  if (!visible.some((item) => item.id === state.selectedId)) {
+    state.selectedId = visible[0]?.id || "";
+  }
+
+  renderEntryList(visible);
+  renderDetail(visible.find((item) => item.id === state.selectedId));
 
   elements.phraseCount.textContent = phrases.length;
   elements.sentenceCount.textContent = sentences.length;
+  elements.visibleCount.textContent = visible.length;
   elements.totalCount.textContent = state.items.length;
   elements.masteredCount.textContent = state.mastered.size;
   elements.empty.hidden = visible.length > 0;
@@ -181,39 +191,70 @@ function matchesFilters(item) {
   return typeMatches && tagMatches && queryMatches;
 }
 
-function renderCards(container, items) {
-  container.innerHTML = "";
+function renderEntryList(items) {
+  elements.entryList.innerHTML = "";
 
   items.forEach((item) => {
-    const card = elements.template.content.firstElementChild.cloneNode(true);
-    const isMastered = state.mastered.has(item.id);
-    const button = card.querySelector(".mastery-button");
-
-    card.querySelector(".card-type").textContent = item.typeLabel;
-    card.querySelector("h3").textContent = item.title;
-    button.textContent = isMastered ? "已掌握" : "待复习";
-    button.classList.toggle("is-mastered", isMastered);
-    button.addEventListener("click", () => toggleMastery(item.id));
-
-    const details = card.querySelector("dl");
-    getDetailRows(item).forEach(([label, value]) => {
-      const dt = document.createElement("dt");
-      const dd = document.createElement("dd");
-      dt.textContent = label;
-      dd.textContent = value;
-      details.append(dt, dd);
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `entry-button${item.id === state.selectedId ? " active" : ""}`;
+    button.setAttribute("aria-pressed", item.id === state.selectedId ? "true" : "false");
+    button.addEventListener("click", () => {
+      state.selectedId = item.id;
+      render();
     });
 
-    const tagRow = card.querySelector(".tag-row");
-    item.tags.forEach((tag) => {
-      const span = document.createElement("span");
-      span.className = "tag";
-      span.textContent = tag;
-      tagRow.append(span);
-    });
+    const title = document.createElement("span");
+    title.className = "entry-title";
+    title.textContent = item.title;
 
-    container.append(card);
+    const meta = document.createElement("span");
+    meta.className = "entry-meta";
+    meta.textContent = `${item.typeLabel} · ${item.tags.slice(0, 2).join(", ") || "untagged"}`;
+
+    button.append(title, meta);
+    elements.entryList.append(button);
   });
+}
+
+function renderDetail(item) {
+  elements.detailCard.innerHTML = "";
+
+  if (!item) {
+    elements.selectedPosition.textContent = "-";
+    return;
+  }
+
+  const card = elements.template.content.firstElementChild.cloneNode(true);
+  const isMastered = state.mastered.has(item.id);
+  const button = card.querySelector(".mastery-button");
+
+  card.querySelector(".card-type").textContent = item.typeLabel;
+  card.querySelector("h3").textContent = item.title;
+  button.textContent = isMastered ? "已掌握" : "待复习";
+  button.classList.toggle("is-mastered", isMastered);
+  button.addEventListener("click", () => toggleMastery(item.id));
+
+  const details = card.querySelector("dl");
+  getDetailRows(item).forEach(([label, value]) => {
+    const dt = document.createElement("dt");
+    const dd = document.createElement("dd");
+    dt.textContent = label;
+    dd.textContent = value;
+    details.append(dt, dd);
+  });
+
+  const tagRow = card.querySelector(".tag-row");
+  item.tags.forEach((tag) => {
+    const span = document.createElement("span");
+    span.className = "tag";
+    span.textContent = tag;
+    tagRow.append(span);
+  });
+
+  const selectedIndex = state.visible.findIndex((visibleItem) => visibleItem.id === item.id);
+  elements.selectedPosition.textContent = `${selectedIndex + 1}/${state.visible.length}`;
+  elements.detailCard.append(card);
 }
 
 function getDetailRows(item) {
