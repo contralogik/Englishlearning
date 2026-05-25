@@ -35,21 +35,25 @@
       </section>
 
       <section class="review-layout">
-        <div>
+        <aside class="index-panel" aria-label="词条索引">
           <div class="section-heading">
-            <h2>词组与搭配</h2>
-            <span id="phrase-count">0</span>
+            <h2>词条索引</h2>
+            <span id="visible-count">0</span>
           </div>
-          <div id="phrases" class="card-grid"></div>
-        </div>
+          <div class="index-counts">
+            <span>词组 <strong id="phrase-count">0</strong></span>
+            <span>好句 <strong id="sentence-count">0</strong></span>
+          </div>
+          <div id="entry-list" class="entry-list"></div>
+        </aside>
 
-        <div>
+        <section class="detail-panel" aria-label="词条详情">
           <div class="section-heading">
-            <h2>精美语句</h2>
-            <span id="sentence-count">0</span>
+            <h2>详细释义</h2>
+            <span id="selected-position">-</span>
           </div>
-          <div id="sentences" class="card-grid"></div>
-        </div>
+          <div id="detail-card"></div>
+        </section>
       </section>
 
       <p id="empty-state" class="empty-state" hidden>没有匹配的内容。换个关键词或标签试试。</p>
