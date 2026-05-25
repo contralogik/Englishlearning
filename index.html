@@ -18,9 +18,9 @@
       </div>
     </header>
 
-    <main>
-      <section class="review-layout">
-        <aside class="index-panel" aria-label="词条索引">
+    <main class="list-page">
+      <section class="list-layout" aria-label="词条索引">
+        <div class="index-panel">
           <div class="section-heading">
             <h2>全部记录</h2>
             <span id="visible-count">0</span>
@@ -37,30 +37,11 @@
             <h3>语句</h3>
             <div id="sentence-list" class="entry-list"></div>
           </section>
-        </aside>
-
-        <section class="detail-panel" aria-label="词条详情">
-          <div class="section-heading">
-            <h2>详细释义</h2>
-            <span id="selected-position">-</span>
-          </div>
-          <div id="detail-card"></div>
-        </section>
+        </div>
       </section>
 
-      <p id="empty-state" class="empty-state" hidden>没有匹配的内容。换个关键词或标签试试。</p>
+      <p id="empty-state" class="empty-state" hidden>还没有记录。</p>
     </main>
-
-    <template id="card-template">
-      <article class="review-card">
-        <div class="card-header">
-          <span class="card-type"></span>
-          <button class="mastery-button" type="button"></button>
-        </div>
-        <h3></h3>
-        <dl></dl>
-      </article>
-    </template>
 
     <script src="script.js"></script>
   </body>

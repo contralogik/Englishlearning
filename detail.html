@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>English Review Detail</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="topbar detail-topbar">
+      <div>
+        <p class="eyebrow">IELTS English Review</p>
+        <h1>详细释义</h1>
+      </div>
+      <button id="back-button" class="back-button" type="button">返回列表</button>
+    </header>
+
+    <main class="detail-page">
+      <div class="section-heading">
+        <h2 id="detail-heading">词条</h2>
+        <span id="selected-position">-</span>
+      </div>
+      <div id="detail-card"></div>
+      <p id="empty-state" class="empty-state" hidden>没有找到这条记录。</p>
+    </main>
+
+    <template id="card-template">
+      <article class="review-card">
+        <div class="card-header">
+          <span class="card-type"></span>
+          <button class="mastery-button" type="button"></button>
+        </div>
+        <h3></h3>
+        <dl></dl>
+      </article>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>

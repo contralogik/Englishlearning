@@ -35,7 +35,7 @@ input {
   align-items: flex-end;
   justify-content: space-between;
   gap: 24px;
-  padding: 36px clamp(18px, 5vw, 64px) 28px;
+  padding: 26px clamp(18px, 5vw, 64px) 22px;
   border-bottom: 1px solid var(--line);
   background: #fbfaf7;
 }
@@ -58,7 +58,7 @@ p {
 
 h1 {
   margin-bottom: 0;
-  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-size: clamp(1.55rem, 4vw, 2.4rem);
   line-height: 1.15;
 }
 
@@ -86,7 +86,7 @@ h1 {
 }
 
 main {
-  width: min(1180px, calc(100% - 32px));
+  width: min(980px, calc(100% - 32px));
   margin: 0 auto;
   padding: 24px 0 54px;
 }
@@ -115,11 +115,8 @@ main {
   font-weight: 700;
 }
 
-.review-layout {
-  display: grid;
-  grid-template-columns: minmax(260px, 360px) minmax(0, 1fr);
-  gap: 20px;
-  align-items: start;
+.list-layout {
+  display: block;
 }
 
 .section-heading {
@@ -145,13 +142,8 @@ main {
 }
 
 .index-panel,
-.detail-panel {
+.detail-page {
   min-width: 0;
-}
-
-.index-panel {
-  position: sticky;
-  top: 14px;
 }
 
 .index-counts {
@@ -170,7 +162,7 @@ main {
 }
 
 .entry-section + .entry-section {
-  margin-top: 22px;
+  margin-top: 28px;
 }
 
 .entry-section h3 {
@@ -182,24 +174,21 @@ main {
 .entry-list {
   display: grid;
   gap: 6px;
-  max-height: 36vh;
-  overflow: auto;
-  padding-right: 4px;
 }
 
-.entry-button {
+.entry-link {
+  display: block;
   width: 100%;
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 10px 12px;
   background: var(--panel);
   color: var(--ink);
-  cursor: pointer;
+  text-decoration: none;
   text-align: left;
 }
 
-.entry-button:hover,
-.entry-button.active {
+.entry-link:hover {
   border-color: var(--accent);
   background: var(--accent-soft);
 }
@@ -216,6 +205,26 @@ main {
   margin-top: 4px;
   color: var(--muted);
   font-size: 0.78rem;
+}
+
+.detail-topbar {
+  align-items: center;
+}
+
+.back-button {
+  min-height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: var(--panel);
+  color: var(--accent-strong);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.back-button:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
 }
 
 .card-grid {
@@ -288,17 +297,7 @@ main {
   .stats {
     justify-content: flex-start;
   }
-
-  .review-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .index-panel {
-    position: static;
-  }
-
-  .entry-list {
-    max-height: none;
-    overflow: visible;
+  .detail-topbar {
+    gap: 16px;
   }
 }

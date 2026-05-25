@@ -13,8 +13,6 @@ const FIELD_LABELS = {
 
 const state = {
   items: [],
-  visible: [],
-  selectedId: "",
   mastered: new Set(JSON.parse(localStorage.getItem("english-review-mastered") || "[]")),
 };
 
@@ -36,7 +34,11 @@ init();
 
 async function init() {
   state.items = await loadEntries();
-  render();
+  if (elements.detailCard) {
+    renderDetailPage();
+  } else {
+    renderListPage();
+  }
 }
 
 async function loadEntries() {
@@ -122,41 +124,27 @@ function normalizeKey(rawKey) {
   return aliases[key] || "";
 }
 
-function render() {
-  const visible = state.items;
-  state.visible = visible;
-  const phrases = visible.filter((item) => item.type === "phrase");
-  const sentences = visible.filter((item) => item.type === "sentence");
-
-  if (!visible.some((item) => item.id === state.selectedId)) {
-    state.selectedId = visible[0]?.id || "";
-  }
-
+function renderListPage() {
+  const phrases = state.items.filter((item) => item.type === "phrase");
+  const sentences = state.items.filter((item) => item.type === "sentence");
   renderEntryList(elements.phraseList, phrases);
   renderEntryList(elements.sentenceList, sentences);
-  renderDetail(visible.find((item) => item.id === state.selectedId));
 
   elements.phraseCount.textContent = phrases.length;
   elements.sentenceCount.textContent = sentences.length;
-  elements.visibleCount.textContent = visible.length;
+  elements.visibleCount.textContent = state.items.length;
   elements.totalCount.textContent = state.items.length;
   elements.masteredCount.textContent = state.mastered.size;
-  elements.empty.hidden = visible.length > 0;
+  elements.empty.hidden = state.items.length > 0;
 }
 
 function renderEntryList(container, items) {
   container.innerHTML = "";
 
   items.forEach((item) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = `entry-button${item.id === state.selectedId ? " active" : ""}`;
-    button.setAttribute("aria-pressed", item.id === state.selectedId ? "true" : "false");
-    button.addEventListener("click", () => {
-      state.selectedId = item.id;
-      render();
-      document.querySelector(".detail-panel").scrollIntoView({ behavior: "smooth", block: "start" });
-    });
+    const link = document.createElement("a");
+    link.className = "entry-link";
+    link.href = `detail.html?id=${encodeURIComponent(item.id)}`;
 
     const title = document.createElement("span");
     title.className = "entry-title";
@@ -166,9 +154,23 @@ function renderEntryList(container, items) {
     meta.className = "entry-meta";
     meta.textContent = item.typeLabel;
 
-    button.append(title, meta);
-    container.append(button);
+    link.append(title, meta);
+    container.append(link);
   });
+}
+
+function renderDetailPage() {
+  document.querySelector("#back-button")?.addEventListener("click", () => {
+    if (history.length > 1) {
+      history.back();
+    } else {
+      location.href = "index.html";
+    }
+  });
+
+  const id = new URLSearchParams(location.search).get("id");
+  const item = state.items.find((entry) => entry.id === id);
+  renderDetail(item);
 }
 
 function renderDetail(item) {
@@ -176,8 +178,13 @@ function renderDetail(item) {
 
   if (!item) {
     elements.selectedPosition.textContent = "-";
+    elements.empty.hidden = false;
     return;
   }
+
+  elements.empty.hidden = true;
+  document.title = `${item.title} - English Review`;
+  document.querySelector("#detail-heading").textContent = item.typeLabel;
 
   const card = elements.template.content.firstElementChild.cloneNode(true);
   const isMastered = state.mastered.has(item.id);
@@ -198,8 +205,8 @@ function renderDetail(item) {
     details.append(dt, dd);
   });
 
-  const selectedIndex = state.visible.findIndex((visibleItem) => visibleItem.id === item.id);
-  elements.selectedPosition.textContent = `${selectedIndex + 1}/${state.visible.length}`;
+  const selectedIndex = state.items.findIndex((visibleItem) => visibleItem.id === item.id);
+  elements.selectedPosition.textContent = `${selectedIndex + 1}/${state.items.length}`;
   elements.detailCard.append(card);
 }
 
@@ -221,7 +228,11 @@ function toggleMastery(id) {
   }
 
   localStorage.setItem("english-review-mastered", JSON.stringify([...state.mastered]));
-  render();
+  if (elements.detailCard) {
+    renderDetailPage();
+  } else {
+    renderListPage();
+  }
 }
 
 function slugify(text) {
