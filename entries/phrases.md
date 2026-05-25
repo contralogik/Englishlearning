@@ -554,3 +554,52 @@ Add new entries with the same structure. Each entry starts with `##`.
 - usage: 修改文章、改善计划、加强纪律
 - tags: speaking, writing, self-improvement
 - date: 2026-05-17
+
+## dock with
+- meaning: 与……对接；和……接合
+- example: dock with
+- usage: 航天器、船只、设备连接场景
+- tags: technology, news
+- date: 2026-05-25
+
+## scrapped that idea
+- meaning: 放弃了那个想法；废弃了那个方案
+- example: scrapped that idea
+- usage: 项目讨论、决策复盘、计划调整
+- tags: speaking, business, decision
+- date: 2026-05-25
+
+## prone to
+- meaning: 易于……；倾向于……
+- example: prone to
+- usage: 描述风险、倾向、弱点或常见问题
+- tags: writing, academic
+- date: 2026-05-25
+
+## composed
+- meaning: 镇定的；沉着的；由……组成的
+- example: composed
+- usage: 描述人的状态或事物构成，需按语境判断
+- tags: speaking, writing
+- date: 2026-05-25
+
+## will truly do anything but
+- meaning: 真的什么都愿意做，就是不愿做……
+- example: will truly do anything but...
+- usage: 描述逃避、拖延、讽刺性的选择
+- tags: speaking, reflection
+- date: 2026-05-25
+
+## instead of
+- meaning: 而不是；代替
+- example: instead of
+- usage: 对比选择或替代方案
+- tags: writing, speaking, daily
+- date: 2026-05-25
+
+## technically feasible
+- meaning: 技术上可行的
+- example: technically feasible
+- usage: 技术评估、项目可行性、商业讨论
+- tags: technology, business, writing
+- date: 2026-05-25
