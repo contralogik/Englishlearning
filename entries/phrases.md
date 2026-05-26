@@ -603,3 +603,59 @@ Add new entries with the same structure. Each entry starts with `##`.
 - usage: 技术评估、项目可行性、商业讨论
 - tags: technology, business, writing
 - date: 2026-05-25
+
+## step down
+- meaning: 辞职；下台；退下来
+- example: step down
+- usage: 职位、领导层、责任交接场景
+- tags: news, business, speaking
+- date: 2026-05-26
+
+## stay away from
+- meaning: 远离；避免接触
+- example: stay away from
+- usage: 建议、风险规避、健康或习惯管理
+- tags: speaking, daily
+- date: 2026-05-26
+
+## face obstacles
+- meaning: 面临障碍；遇到阻力
+- example: face obstacles
+- usage: 写作中描述项目、学习、政策或个人目标受阻
+- tags: writing, academic
+- date: 2026-05-26
+
+## pivot to
+- meaning: 转向；调整方向到……
+- example: pivot to
+- usage: 商业、职业规划、策略调整
+- tags: business, technology, decision
+- date: 2026-05-26
+
+## encapsulate
+- meaning: 概括；浓缩表达；封装
+- example: encapsulate
+- usage: 写作中概括核心思想；技术语境中表示封装
+- tags: writing, technology
+- date: 2026-05-26
+
+## cope with
+- meaning: 应对；处理；承受
+- example: cope with
+- usage: 压力、问题、变化、困难场景
+- tags: writing, speaking
+- date: 2026-05-26
+
+## just roll with it
+- meaning: 顺其自然；随机应变；先接受现状继续走
+- example: just roll with it
+- usage: 口语中表示不纠结、灵活应对
+- tags: speaking, daily
+- date: 2026-05-26
+
+## by no means
+- meaning: 绝不；一点也不
+- example: by no means
+- usage: 正式或半正式表达，用于强调否定
+- tags: writing, academic
+- date: 2026-05-26
