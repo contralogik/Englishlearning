@@ -659,3 +659,52 @@ Add new entries with the same structure. Each entry starts with `##`.
 - usage: 正式或半正式表达，用于强调否定
 - tags: writing, academic
 - date: 2026-05-26
+
+## feel pissed
+- meaning: 感到很生气、很恼火
+- example: feel pissed
+- usage: 口语中表达不满、愤怒或被冒犯的情绪
+- tags: speaking, daily
+- date: 2026-05-30
+
+## be supposed to
+- meaning: 应该；被期望；按理说
+- example: be supposed to
+- usage: 描述规则、预期、责任或原本应发生的事情
+- tags: speaking, writing, daily
+- date: 2026-05-30
+
+## blow my mind
+- meaning: 让我震惊；让我大开眼界
+- example: blow my mind
+- usage: 口语中表达惊讶、赞叹或强烈冲击
+- tags: speaking, daily
+- date: 2026-05-30
+
+## be glued to
+- meaning: 一直盯着；沉迷于；被牢牢吸引住
+- example: be glued to
+- usage: 描述人长时间看屏幕、关注新闻或沉迷某事
+- tags: speaking, daily
+- date: 2026-05-30
+
+## overwhelming consensus
+- meaning: 压倒性共识；广泛一致的看法
+- example: overwhelming consensus
+- usage: 新闻、学术或议论文中描述大多数人或证据支持同一观点
+- tags: writing, academic, news
+- date: 2026-05-30
+
+## round out
+- meaning: 使完整；补足；完善
+- example: round out
+- usage: 描述补充技能、内容、团队或经历，使整体更完整
+- tags: writing, business
+- date: 2026-05-30
+
+## crash out
+- meaning: 彻底崩溃；情绪失控；出局
+- example: crash out
+- usage: 口语、体育或比赛语境中描述失控、失败或被淘汰
+- tags: speaking, daily
+- date: 2026-05-30
