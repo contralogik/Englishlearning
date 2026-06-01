@@ -106,3 +106,38 @@ Add new entries with the same structure. Each entry starts with `##`.
 - usage: 投资反思、时间管理、长期主义
 - tags: finance, reflection, writing
 - date: 2026-05-17
+
+## The magic of compounding is the eighth wonder of the world.
+- meaning: 复利的魔力是世界第八大奇迹。
+- takeaway: the magic of compounding; the eighth wonder of the world
+- usage: 投资、长期主义、学习积累、习惯养成
+- tags: finance, reflection, writing
+- date: 2026-06-01
+
+## Don't spend your life optimizing the current chapter when you could be writing a new one.
+- meaning: 当你本可以书写新篇章时，不要把一生都花在优化当前这一章上。
+- takeaway: optimize the current chapter; write a new one
+- usage: 人生选择、职业转向、长期规划、放弃旧路径
+- tags: reflection, writing, speaking
+- date: 2026-06-01
+
+## Investing should support your life, not become your life.
+- meaning: 投资应该服务于你的生活，而不是变成你的全部生活。
+- takeaway: support your life, not become your life
+- usage: 投资反思、时间管理、生活优先级
+- tags: finance, reflection, writing
+- date: 2026-06-01
+
+## The key is to focus on what truly leads to a better you, not just fleeting comfort.
+- meaning: 关键是专注于真正让你变得更好的东西，而不是短暂的舒适。
+- takeaway: what truly leads to...; fleeting comfort
+- usage: 自律、成长、学习、长期主义表达
+- tags: reflection, writing, speaking
+- date: 2026-06-01
+
+## The extra time and attention would be better invested in things that can genuinely improve my future.
+- meaning: 多出来的时间和注意力，更值得投入到那些真正能改善我未来的事情上。
+- takeaway: time and attention would be better invested in...
+- usage: 时间管理、投资反思、学习规划、长期目标
+- tags: reflection, finance, writing
+- date: 2026-06-01
