@@ -708,3 +708,24 @@ Add new entries with the same structure. Each entry starts with `##`.
 - usage: 口语、体育或比赛语境中描述失控、失败或被淘汰
 - tags: speaking, daily
 - date: 2026-05-30
+
+## suffer from
+- meaning: 遭受；患有；受……之苦
+- example: suffer from
+- usage: 描述疾病、问题、压力、损失或长期困扰
+- tags: writing, speaking
+- date: 2026-06-01
+
+## be upset with
+- meaning: 对……不高兴；因……生气或难过
+- example: be upset with
+- usage: 描述人际关系、情绪反应或不满
+- tags: speaking, daily
+- date: 2026-06-01
+
+## distract me from focusing on
+- meaning: 分散我的注意力，使我无法专注于……
+- example: distracts me from focusing on
+- usage: 描述手机、噪音、市场波动或杂事干扰核心任务
+- tags: speaking, writing, reflection
+- date: 2026-06-01
