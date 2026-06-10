@@ -729,3 +729,101 @@ Add new entries with the same structure. Each entry starts with `##`.
 - usage: 描述手机、噪音、市场波动或杂事干扰核心任务
 - tags: speaking, writing, reflection
 - date: 2026-06-01
+
+## drum up
+- meaning: 竭力争取；设法招揽；激起兴趣或支持
+- example: The team tried to drum up support for the new project.
+- usage: 商业、活动推广、争取支持或制造关注
+- tags: business, speaking, news
+- date: 2026-06-10
+
+## rattle off
+- meaning: 快速连续地说出；一口气列举
+- example: She can rattle off dozens of useful expressions from memory.
+- usage: 描述快速说出名单、数字、事实或观点
+- tags: speaking, daily
+- date: 2026-06-10
+
+## track me down
+- meaning: 找到我；追踪到我；设法联系到我
+- example: If anything urgent happens, you can track me down by phone.
+- usage: 口语中表示找到某人、联系某人或追踪位置
+- tags: speaking, daily
+- date: 2026-06-10
+
+## boil down to
+- meaning: 归结为；归根到底是
+- example: The problem may boil down to a lack of consistent practice.
+- usage: 总结核心原因、本质问题或最终结论
+- tags: writing, speaking, reflection
+- date: 2026-06-10
+
+## the Holy Grail of
+- meaning: 某领域最理想、最难得、最被追求的东西
+- example: A simple system that people actually use is the Holy Grail of productivity.
+- usage: 科技、投资、学习方法、商业目标中的理想追求
+- tags: writing, business, metaphor
+- date: 2026-06-10
+
+## hustle and bustle
+- meaning: 熙熙攘攘；忙碌喧嚣
+- example: I enjoy the hustle and bustle of the city, but only in small doses.
+- usage: 描述城市、市场、车站或繁忙生活场景
+- tags: writing, daily
+- date: 2026-06-10
+
+## rack up
+- meaning: 累积；积累；大量获得
+- example: Small daily expenses can rack up faster than you expect.
+- usage: 描述分数、债务、成本、损失、经验或成就累积
+- tags: speaking, finance, daily
+- date: 2026-06-10
+
+## in my opinion
+- meaning: 在我看来；依我看
+- example: In my opinion, consistency matters more than intensity.
+- usage: 表达个人观点，适合口语和议论文
+- tags: speaking, writing
+- date: 2026-06-10
+
+## be supposed to do
+- meaning: 应该做；按理应做；被期望做
+- example: You are supposed to review the words before they fade from memory.
+- usage: 描述规则、责任、安排、预期或本应发生的行为
+- tags: grammar, speaking, writing
+- date: 2026-06-10
+
+## bummed out
+- meaning: 沮丧的；失望的；心情低落的
+- example: He felt bummed out after missing the opportunity.
+- usage: 非正式口语中描述失望、难过或心情受挫
+- tags: speaking, daily
+- date: 2026-06-10
+
+## in parallel
+- meaning: 并行地；同时进行
+- example: I am improving my vocabulary and speaking skills in parallel.
+- usage: 工作、学习、项目、技术流程中表示同步推进
+- tags: writing, technology, business
+- date: 2026-06-10
+
+## happened to do
+- meaning: 碰巧做了某事；恰好做了某事
+- example: I happened to read an article that explained the idea clearly.
+- usage: 叙事中说明偶然发生的行为或巧合
+- tags: speaking, writing
+- date: 2026-06-10
+
+## be X days away from
+- meaning: 距离……还有 X 天
+- example: The exam is only ten days away from starting.
+- usage: 描述考试、旅行、发布、截止日期或重要事件倒计时
+- tags: speaking, daily
+- date: 2026-06-10
+
+## stave off
+- meaning: 暂时避开；延缓；防止发生
+- example: A better routine can help stave off burnout during exam preparation.
+- usage: 描述延缓风险、压力、衰退、疾病或危机
+- tags: writing, speaking
+- date: 2026-06-10
