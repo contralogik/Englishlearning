@@ -141,3 +141,10 @@ Add new entries with the same structure. Each entry starts with `##`.
 - usage: 时间管理、投资反思、学习规划、长期目标
 - tags: reflection, finance, writing
 - date: 2026-06-01
+
+## You don't parlay when you're on the back foot.
+- meaning: 当你处于被动或劣势时，不要继续加码下注。
+- takeaway: parlay; on the back foot
+- usage: 投资、风险控制、决策复盘、提醒不要在劣势中盲目加码
+- tags: finance, reflection, speaking
+- date: 2026-06-10
