@@ -1,6 +1,8 @@
 const DATA_SOURCES = [
   { type: "phrase", label: "词组", url: "entries/phrases.md" },
+  { type: "phrase", label: "词组", url: "entries/phrases-2026-06-15.md" },
   { type: "sentence", label: "好句", url: "entries/sentences.md" },
+  { type: "sentence", label: "好句", url: "entries/sentences-2026-06-15.md" },
 ];
 
 const FIELD_LABELS = {
@@ -11,9 +13,15 @@ const FIELD_LABELS = {
   date: "日期",
 };
 
+const MASTERED_KEY = "english-review-mastered";
+const PRIORITY_KEY = "english-review-priority";
+const FILTER_KEY = "english-review-filter";
+
 const state = {
   items: [],
-  mastered: new Set(JSON.parse(localStorage.getItem("english-review-mastered") || "[]")),
+  mastered: new Set(JSON.parse(localStorage.getItem(MASTERED_KEY) || "[]")),
+  priority: new Set(JSON.parse(localStorage.getItem(PRIORITY_KEY) || "[]")),
+  filter: sessionStorage.getItem(FILTER_KEY) || "all",
 };
 
 const elements = {
@@ -26,6 +34,8 @@ const elements = {
   selectedPosition: document.querySelector("#selected-position"),
   totalCount: document.querySelector("#total-count"),
   masteredCount: document.querySelector("#mastered-count"),
+  priorityCount: document.querySelector("#priority-count"),
+  listHeading: document.querySelector("#list-heading"),
   empty: document.querySelector("#empty-state"),
   template: document.querySelector("#card-template"),
 };
@@ -35,8 +45,16 @@ init();
 async function init() {
   state.items = await loadEntries();
   if (elements.detailCard) {
+    document.querySelector("#back-button")?.addEventListener("click", () => {
+      if (history.length > 1) {
+        history.back();
+      } else {
+        location.href = "index.html";
+      }
+    });
     renderDetailPage();
   } else {
+    bindFilterButtons();
     renderListPage();
   }
 }
@@ -125,21 +143,37 @@ function normalizeKey(rawKey) {
 }
 
 function renderListPage() {
-  const phrases = state.items.filter((item) => item.type === "phrase");
-  const sentences = state.items.filter((item) => item.type === "sentence");
+  const visibleItems = getVisibleItems();
+  const phrases = visibleItems.filter((item) => item.type === "phrase");
+  const sentences = visibleItems.filter((item) => item.type === "sentence");
   renderEntryList(elements.phraseList, phrases);
   renderEntryList(elements.sentenceList, sentences);
 
   elements.phraseCount.textContent = phrases.length;
   elements.sentenceCount.textContent = sentences.length;
-  elements.visibleCount.textContent = state.items.length;
+  elements.visibleCount.textContent = visibleItems.length;
   elements.totalCount.textContent = state.items.length;
-  elements.masteredCount.textContent = state.mastered.size;
-  elements.empty.hidden = state.items.length > 0;
+  elements.masteredCount.textContent = countExistingIds(state.mastered);
+  elements.priorityCount.textContent = countExistingIds(state.priority);
+  elements.listHeading.textContent = state.filter === "mastered"
+    ? "已掌握"
+    : state.filter === "priority"
+      ? "重点"
+      : "全部记录";
+  elements.empty.textContent = state.filter === "all"
+    ? "还没有记录。"
+    : state.filter === "mastered"
+      ? "还没有标记为已掌握的词条。"
+      : "还没有标记为重点的词条。";
+  elements.empty.hidden = visibleItems.length > 0;
+  document.querySelectorAll(".stat-filter").forEach((button) => {
+    button.classList.toggle("active", button.dataset.filter === state.filter);
+  });
 }
 
 function renderEntryList(container, items) {
   container.innerHTML = "";
+  container.closest(".entry-section").hidden = items.length === 0;
 
   items.forEach((item) => {
     const link = document.createElement("a");
@@ -152,7 +186,11 @@ function renderEntryList(container, items) {
 
     const meta = document.createElement("span");
     meta.className = "entry-meta";
-    meta.textContent = item.typeLabel;
+    const statuses = [];
+    if (state.priority.has(item.id)) statuses.push("重点");
+    if (state.mastered.has(item.id)) statuses.push("已掌握");
+    meta.textContent = statuses.join(" · ");
+    meta.hidden = statuses.length === 0;
 
     link.append(title, meta);
     container.append(link);
@@ -160,14 +198,6 @@ function renderEntryList(container, items) {
 }
 
 function renderDetailPage() {
-  document.querySelector("#back-button")?.addEventListener("click", () => {
-    if (history.length > 1) {
-      history.back();
-    } else {
-      location.href = "index.html";
-    }
-  });
-
   const id = new URLSearchParams(location.search).get("id");
   const item = state.items.find((entry) => entry.id === id);
   renderDetail(item);
@@ -188,13 +218,18 @@ function renderDetail(item) {
 
   const card = elements.template.content.firstElementChild.cloneNode(true);
   const isMastered = state.mastered.has(item.id);
-  const button = card.querySelector(".mastery-button");
+  const isPriority = state.priority.has(item.id);
+  const masteryButton = card.querySelector(".mastery-button");
+  const priorityButton = card.querySelector(".priority-button");
 
   card.querySelector(".card-type").textContent = item.typeLabel;
   card.querySelector("h3").textContent = item.title;
-  button.textContent = isMastered ? "已掌握" : "待复习";
-  button.classList.toggle("is-mastered", isMastered);
-  button.addEventListener("click", () => toggleMastery(item.id));
+  masteryButton.textContent = isMastered ? "已掌握" : "标记已掌握";
+  masteryButton.classList.toggle("is-mastered", isMastered);
+  masteryButton.addEventListener("click", () => toggleMastery(item.id));
+  priorityButton.textContent = isPriority ? "重点" : "标记重点";
+  priorityButton.classList.toggle("is-priority", isPriority);
+  priorityButton.addEventListener("click", () => togglePriority(item.id));
 
   const details = card.querySelector("dl");
   getDetailRows(item).forEach(([label, value]) => {
@@ -227,12 +262,54 @@ function toggleMastery(id) {
     state.mastered.add(id);
   }
 
-  localStorage.setItem("english-review-mastered", JSON.stringify([...state.mastered]));
+  localStorage.setItem(MASTERED_KEY, JSON.stringify([...state.mastered]));
   if (elements.detailCard) {
-    renderDetailPage();
+    renderDetail(state.items.find((entry) => entry.id === id));
   } else {
     renderListPage();
   }
+}
+
+function togglePriority(id) {
+  if (state.priority.has(id)) {
+    state.priority.delete(id);
+  } else {
+    state.priority.add(id);
+  }
+
+  localStorage.setItem(PRIORITY_KEY, JSON.stringify([...state.priority]));
+  if (elements.detailCard) {
+    renderDetail(state.items.find((entry) => entry.id === id));
+  } else {
+    renderListPage();
+  }
+}
+
+function bindFilterButtons() {
+  const allowedFilters = new Set(["all", "mastered", "priority"]);
+  if (!allowedFilters.has(state.filter)) state.filter = "all";
+
+  document.querySelectorAll(".stat-filter").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.filter = button.dataset.filter;
+      sessionStorage.setItem(FILTER_KEY, state.filter);
+      renderListPage();
+    });
+  });
+}
+
+function getVisibleItems() {
+  if (state.filter === "mastered") {
+    return state.items.filter((item) => state.mastered.has(item.id));
+  }
+  if (state.filter === "priority") {
+    return state.items.filter((item) => state.priority.has(item.id));
+  }
+  return state.items;
+}
+
+function countExistingIds(idSet) {
+  return state.items.reduce((count, item) => count + Number(idSet.has(item.id)), 0);
 }
 
 function slugify(text) {

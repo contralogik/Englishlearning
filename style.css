@@ -70,16 +70,28 @@ h1 {
   color: var(--muted);
 }
 
-.stats span {
+.stat-filter {
   min-width: 112px;
   padding: 10px 12px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel);
+  color: var(--muted);
+  cursor: pointer;
   text-align: center;
 }
 
-.stats strong {
+.stat-filter:hover {
+  border-color: var(--accent);
+}
+
+.stat-filter.active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+.stat-filter strong {
   display: block;
   color: var(--accent-strong);
   font-size: 1.25rem;
@@ -92,7 +104,8 @@ main {
 }
 
 .chip,
-.mastery-button {
+.mastery-button,
+.priority-button {
   min-height: 36px;
   border: 1px solid var(--line);
   border-radius: 999px;
@@ -103,7 +116,8 @@ main {
 }
 
 .chip:hover,
-.mastery-button:hover {
+.mastery-button:hover,
+.priority-button:hover {
   border-color: var(--accent);
 }
 
@@ -112,6 +126,13 @@ main {
   border-color: var(--accent);
   background: var(--accent-soft);
   color: var(--accent-strong);
+  font-weight: 700;
+}
+
+.priority-button.is-priority {
+  border-color: var(--gold);
+  background: #fff4dc;
+  color: #75470a;
   font-weight: 700;
 }
 
@@ -201,10 +222,17 @@ main {
 }
 
 .entry-meta {
-  display: none;
+  display: inline-block;
   margin-top: 4px;
+  border-radius: 999px;
+  padding: 1px 7px;
+  background: #f2eee5;
   color: var(--muted);
   font-size: 0.78rem;
+}
+
+.entry-meta[hidden] {
+  display: none;
 }
 
 .detail-topbar {
@@ -249,10 +277,17 @@ main {
   margin-bottom: 12px;
 }
 
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
 .card-type {
   color: var(--gold);
   font-size: 0.82rem;
-  font-weight: 800;
+  font-weigight: 800;
 }
 
 .review-card h3 {
@@ -295,9 +330,24 @@ main {
   }
 
   .stats {
-    justify-content: flex-start;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .stat-filter {
+    min-width: 0;
   }
   .detail-topbar {
     gap: 16px;
+  }
+
+  .card-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .card-actions {
+    justify-content: flex-start;
   }
 }

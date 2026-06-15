@@ -12,9 +12,16 @@
         <p class="eyebrow">IELTS English Review</p>
         <h1>英文词组与好句复习卡片</h1>
       </div>
-      <div class="stats" aria-label="复习统计">
-        <span><strong id="total-count">0</strong> 条内容</span>
-        <span><strong id="mastered-count">0</strong> 已掌握</span>
+      <div class="stats" aria-label="复习筛选">
+        <button class="stat-filter active" data-filter="all" type="button">
+          <strong id="total-count">0</strong> 全部
+        </button>
+        <button class="stat-filter" data-filter="mastered" type="button">
+          <strong id="mastered-count">0</strong> 已掌握
+        </button>
+        <button class="stat-filter" data-filter="priority" type="button">
+          <strong id="priority-count">0</strong> 重点
+        </button>
       </div>
     </header>
 
@@ -22,7 +29,7 @@
       <section class="list-layout" aria-label="词条索引">
         <div class="index-panel">
           <div class="section-heading">
-            <h2>全部记录</h2>
+            <h2 id="list-heading">全部记录</h2>
             <span id="visible-count">0</span>
           </div>
           <div class="index-counts">
