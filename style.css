@@ -25,6 +25,10 @@ body {
   line-height: 1.6;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 button,
 input {
   font: inherit;
@@ -175,15 +179,27 @@ main {
   font-size: 0.88rem;
 }
 
-.index-counts span {
+.index-counts a {
+  color: inherit;
+  text-decoration: none;
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 5px 8px;
   background: rgba(255, 255, 255, 0.7);
 }
 
+.index-counts a:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
 .entry-section + .entry-section {
   margin-top: 28px;
+}
+
+.entry-section {
+  scroll-margin-top: 18px;
 }
 
 .entry-section h3 {
