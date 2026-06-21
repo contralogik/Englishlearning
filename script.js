@@ -1,13 +1,17 @@
 const DATA_SOURCES = [
   { type: "phrase", label: "词组", url: "entries/phrases.md" },
   { type: "phrase", label: "词组", url: "entries/phrases-2026-06-15.md" },
+  { type: "phrase", label: "词组", url: "entries/phrases-2026-06-21.md" },
   { type: "sentence", label: "好句", url: "entries/sentences.md" },
   { type: "sentence", label: "好句", url: "entries/sentences-2026-06-15.md" },
+  { type: "sentence", label: "好句", url: "entries/sentences-2026-06-21.md" },
+  { type: "article", label: "好文", url: "entries/articles-2026-06-21.md" },
 ];
 
 const FIELD_LABELS = {
   meaning: "中文理解",
   example: "来源句",
+  content: "原文",
   usage: "使用场景",
   takeaway: "可借鉴表达",
   date: "日期",
@@ -27,9 +31,11 @@ const state = {
 const elements = {
   phraseList: document.querySelector("#phrase-list"),
   sentenceList: document.querySelector("#sentence-list"),
+  articleList: document.querySelector("#article-list"),
   detailCard: document.querySelector("#detail-card"),
   phraseCount: document.querySelector("#phrase-count"),
   sentenceCount: document.querySelector("#sentence-count"),
+  articleCount: document.querySelector("#article-count"),
   visibleCount: document.querySelector("#visible-count"),
   selectedPosition: document.querySelector("#selected-position"),
   totalCount: document.querySelector("#total-count"),
@@ -80,32 +86,45 @@ function parseMarkdownEntries(markdown, source) {
 }
 
 function parseBlock(block, source) {
-  const lines = block.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
-  const titleLine = lines.find((line) => line.startsWith("## "));
+  const lines = block.split(/\r?\n/).map((line) => line.trimEnd()).filter((line) => line.trim());
+  const titleLine = lines.find((line) => line.trim().startsWith("## "));
   if (!titleLine) return null;
 
   const item = {
     type: source.type,
     typeLabel: source.label,
-    title: titleLine.replace(/^##\s+/, "").trim(),
+    title: titleLine.trim().replace(/^##\s+/, "").trim(),
     meaning: "",
     example: "",
+    content: "",
     usage: "",
     takeaway: "",
     tags: [],
     date: "",
   };
 
-  lines.forEach((line) => {
+  let currentKey = "";
+  lines.forEach((rawLine) => {
+    const line = rawLine.trim();
+    if (line.startsWith("## ")) return;
+
     const match = line.match(/^-\s*([^:：]+)[:：]\s*(.*)$/);
-    if (!match) return;
+    if (!match) {
+      if (currentKey && /^\s+/.test(rawLine)) {
+        const continuation = rawLine.replace(/^\s+/, "").trimEnd();
+        item[currentKey] = item[currentKey] ? `${item[currentKey]}\n${continuation}` : continuation;
+      }
+      return;
+    }
 
     const key = normalizeKey(match[1]);
     const value = match[2].trim();
     if (key === "tags") {
       item.tags = value.split(/[,，]/).map((tag) => tag.trim()).filter(Boolean);
+      currentKey = "";
     } else if (key) {
       item[key] = value;
+      currentKey = key;
     }
   });
 
@@ -114,6 +133,7 @@ function parseBlock(block, source) {
     item.title,
     item.meaning,
     item.example,
+    item.content,
     item.usage,
     item.takeaway,
     item.tags.join(" "),
@@ -130,6 +150,8 @@ function normalizeKey(rawKey) {
     meaning: "meaning",
     "来源句": "example",
     example: "example",
+    "原文": "content",
+    content: "content",
     "使用场景": "usage",
     usage: "usage",
     "可借鉴表达": "takeaway",
@@ -146,11 +168,14 @@ function renderListPage() {
   const visibleItems = getVisibleItems();
   const phrases = visibleItems.filter((item) => item.type === "phrase");
   const sentences = visibleItems.filter((item) => item.type === "sentence");
+  const articles = visibleItems.filter((item) => item.type === "article");
   renderEntryList(elements.phraseList, phrases);
   renderEntryList(elements.sentenceList, sentences);
+  renderEntryList(elements.articleList, articles);
 
   elements.phraseCount.textContent = phrases.length;
   elements.sentenceCount.textContent = sentences.length;
+  elements.articleCount.textContent = articles.length;
   elements.visibleCount.textContent = visibleItems.length;
   elements.totalCount.textContent = state.items.length;
   elements.masteredCount.textContent = countExistingIds(state.mastered);
@@ -246,9 +271,11 @@ function renderDetail(item) {
 }
 
 function getDetailRows(item) {
-  const keys = item.type === "phrase"
-    ? ["meaning", "example", "usage", "date"]
-    : ["meaning", "takeaway", "usage", "date"];
+  const keys = {
+    phrase: ["meaning", "example", "usage", "date"],
+    sentence: ["meaning", "takeaway", "usage", "date"],
+    article: ["meaning", "content", "usage", "date"],
+  }[item.type] || ["meaning", "usage", "date"];
 
   return keys
     .filter((key) => item[key])
