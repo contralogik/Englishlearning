@@ -20,3 +20,38 @@
 - usage: 询问某种行为、现象或习惯在特定人群中的普遍程度
 - tags: speaking, question
 - date: 2026-06-21
+
+## What is most likely the very first thing you're going to do when you find yourself bored?
+- meaning: 当你发现自己无聊时，你最可能第一件事会做什么？
+- takeaway: What is most likely the first thing you do when...?
+- usage: 开场提问，用于引出习惯、行为模式或自我反思
+- tags: speaking, question
+- date: 2026-07-02
+
+## If you had the chance to live a life completely free and away from social media, would you?
+- meaning: 如果你有机会过一种完全远离社交媒体的生活，你愿意吗？
+- takeaway: If you had the chance to..., would you?
+- usage: 假设性提问，用于演讲开头、讨论选择或价值观
+- tags: speaking, writing
+- date: 2026-07-02
+
+## Every second we spend on social media is also another second we miss out on actual, real life.
+- meaning: 我们花在社交媒体上的每一秒，也是在错过真实生活的一秒。
+- takeaway: Every second we spend on... is also another second we miss out on...
+- usage: 强调机会成本、时间流失和现实生活的重要性
+- tags: writing, reflection
+- date: 2026-07-02
+
+## True connection isn't formed through a screen, but through reality.
+- meaning: 真正的连接不是通过屏幕形成的，而是在现实中形成的。
+- takeaway: True ... isn't formed through..., but through...
+- usage: 讨论人际关系、社交媒体、真实互动和连接感
+- tags: writing, relationship
+- date: 2026-07-02
+
+## Deleting social media has reminded me that there's a lot of life to be lived outside your phone.
+- meaning: 删除社交媒体提醒了我，手机之外还有大量真正值得生活的东西。
+- takeaway: ... has reminded me that there is a lot of life to be lived outside...
+- usage: 总结生活方式改变、注意力回归和现实体验
+- tags: writing, reflection
+- date: 2026-07-02
