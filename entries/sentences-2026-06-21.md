@@ -55,3 +55,31 @@
 - usage: 总结生活方式改变、注意力回归和现实体验
 - tags: writing, reflection
 - date: 2026-07-02
+
+## Let's wrap this up.
+- meaning: 我们把这个收尾吧；我们结束这个吧。
+- takeaway: Let's wrap this up.
+- usage: 会议、讨论、任务或演讲结束前使用
+- tags: speaking, daily
+- date: 2026-07-10
+
+## I plan to take my daughter to fly a kite in the park this weekend, but since it might rain, I'll wear my new waterproof coat.
+- meaning: 我计划这个周末带女儿去公园放风筝，但因为可能下雨，我会穿上新的防水外套。
+- takeaway: I plan to..., but since..., I'll...
+- usage: 描述计划、天气影响和应对安排
+- tags: speaking, daily
+- date: 2026-07-10
+
+## Fake it till you make it.
+- meaning: 先装作能做到，直到真的做到。
+- takeaway: Fake it till you make it.
+- usage: 鼓励自己在不够自信时先行动、先表现出能力
+- tags: quote, speaking
+- date: 2026-07-10
+
+## He can't keep getting away with this.
+- meaning: 他不能一直这样做错事还不承担后果。
+- takeaway: can't keep getting away with...
+- usage: 表达对某人持续违规、逃避责任或不公平行为的不满
+- tags: speaking, attitude
+- date: 2026-07-10
