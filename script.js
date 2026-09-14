@@ -2,9 +2,11 @@ const DATA_SOURCES = [
   { type: "phrase", label: "词组", url: "entries/phrases.md" },
   { type: "phrase", label: "词组", url: "entries/phrases-2026-06-15.md" },
   { type: "phrase", label: "词组", url: "entries/phrases-2026-06-21.md" },
+  { type: "phrase", label: "词组", url: "entries/phrases-2026-09-14.md" },
   { type: "sentence", label: "好句", url: "entries/sentences.md" },
   { type: "sentence", label: "好句", url: "entries/sentences-2026-06-15.md" },
   { type: "sentence", label: "好句", url: "entries/sentences-2026-06-21.md" },
+  { type: "sentence", label: "好句", url: "entries/sentences-2026-09-14.md" },
   { type: "article", label: "好文", url: "entries/articles-2026-06-21.md" },
 ];
 
